@@ -20,7 +20,7 @@
                         name="searchType"
                         th:id="${column.key}"
                         th:value="${column.key}"
-                        th:checked="${column.key == 'all'}"/>
+                        th:checked="${column.key == defaultRadio}"/>
                 <label th:for="${column.key}" th:text="${column.value}"></label>
             </span>
 
@@ -37,7 +37,7 @@
     <hr />
 
     <!-- TODO #4 - Loop over the search results to display all job fields. -->
-
+    <th:block th:replace="fragments:: list"></th:block>
 </div>
 
 </body>

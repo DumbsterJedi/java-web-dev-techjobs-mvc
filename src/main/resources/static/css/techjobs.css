@@ -10,6 +10,7 @@ th {
     text-align: center;
 }
 
+
 td {
     vertical-align: top;
 }
@@ -43,4 +44,12 @@ label {
 
 .centered {
     text-align: center;
+}
+
+.job-label{
+font-weight: bold;
+}
+.job-data{
+font-style: italic;
+font-weight: normal
 }

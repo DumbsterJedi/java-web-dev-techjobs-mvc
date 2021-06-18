@@ -1,6 +1,7 @@
 package org.launchcode.javawebdevtechjobsmvc.controllers;
 
 import org.launchcode.javawebdevtechjobsmvc.models.Job;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,26 +17,11 @@ import java.util.HashMap;
  */
 @Controller
 @RequestMapping(value = "list")
-public class ListController {
+public class ListController extends TechJobsController{
 
-    static HashMap<String, String> columnChoices = new HashMap<>();
-    static HashMap<String, Object> tableChoices = new HashMap<>();
 
-    public ListController () {
-        columnChoices.put("all", "All");
-        columnChoices.put("employer", "Employer");
-        columnChoices.put("location", "Location");
-        columnChoices.put("positionType", "Position Type");
-        columnChoices.put("coreCompetency", "Skill");
-
-        tableChoices.put("employer", JobData.getAllEmployers());
-        tableChoices.put("location", JobData.getAllLocations());
-        tableChoices.put("positionType", JobData.getAllPositionTypes());
-        tableChoices.put("coreCompetency", JobData.getAllCoreCompetency());
-    }
-
-    @RequestMapping(value = "")
-    public String list(Model model) {
+        @RequestMapping(value = "")
+    public String list (Model model) {
         model.addAttribute("columns", columnChoices);
         model.addAttribute("tableChoices", tableChoices);
         model.addAttribute("employers", JobData.getAllEmployers());
@@ -47,7 +33,7 @@ public class ListController {
     }
 
     @RequestMapping(value = "jobs")
-    public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
+    public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam(required = false) String value) {
         ArrayList<Job> jobs;
         if (column.toLowerCase().equals("all")){
             jobs = JobData.findAll();
